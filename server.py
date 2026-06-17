@@ -153,12 +153,40 @@ def get_status():
 
 @app.get("/api/movies")
 def search_movies(q: str = Query("", description="Search query for movie titles")):
-    """Autocomplete search for movie titles."""
+    """Autocomplete search for movie titles with relevance scoring."""
     if not q or len(q) < 2:
         return []
     
-    # Filter matching movies
-    matches = df[df["title"].str.contains(q, case=False, na=False)].head(15)
+    # Filter matching movies (case-insensitive substring match, regex=False is faster and safer)
+    candidates = df[df["title"].str.contains(q, case=False, na=False, regex=False)].copy()
+    
+    if candidates.empty:
+        return []
+    
+    # Helper relevance scoring function
+    def score_match(title: str, query: str) -> float:
+        t_low = title.lower()
+        q_low = query.lower()
+        
+        # Priority 1: Title starts with the query
+        if t_low.startswith(q_low):
+            return 100.0 - (len(title) / 1000.0)
+            
+        # Priority 2: Query starts a word in the title (word boundary)
+        word_boundary = f" {q_low}"
+        if word_boundary in t_low:
+            pos = t_low.find(word_boundary)
+            return 50.0 - (pos / 10.0) - (len(title) / 1000.0)
+            
+        # Priority 3: Contains the query anywhere else
+        pos = t_low.find(q_low)
+        if pos != -1:
+            return 10.0 - (pos / 10.0) - (len(title) / 1000.0)
+            
+        return 0.0
+
+    candidates["search_score"] = candidates["title"].apply(lambda t: score_match(t, q))
+    matches = candidates.sort_values(by="search_score", ascending=False).head(15)
     
     results = []
     for _, row in matches.iterrows():
