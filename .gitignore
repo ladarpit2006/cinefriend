@@ -1,8 +1,27 @@
-Dataset
+# Data files & Raw datasets
+Dataset/
 DataSet.csv
-genome_scores.csv
-genome_tags.csv
-link.csv
-movie.csv
-rating.csv
-tag.csv
+*.csv
+
+# Python environment & artifacts
+.env/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Deep Learning weights & cache
+models_data/
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# IDE files
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db

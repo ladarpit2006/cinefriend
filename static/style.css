@@ -1,0 +1,686 @@
+/* =========================================================================
+   1. GLOBAL STYLES & FLIX.ID COLOR THEME TOKENS
+   ========================================================================= */
+:root {
+    --bg-primary: #ffffff; /* Pure white background */
+    --bg-card: #ffffff; /* Pure white card background */
+    --bg-input: #ffffff; /* Pure white input background */
+    
+    --border-color: #000000; /* Solid black borders */
+    --border-hover: #000000;
+    
+    --text-primary: #000000; /* Pure black text */
+    --text-secondary: #000000; /* Pure black secondary text */
+    --text-muted: #555555; /* Dark grey for secondary details */
+    
+    /* Brand Accent Colors (Brutalist Black & White) */
+    --accent-primary: #000000; /* Pure Black */
+    --accent-primary-hover: #222222;
+    
+    --accent-secondary: #000000;
+    --accent-secondary-hover: #222222;
+    
+    --accent-gold: #000000; /* Black rating stars */
+    
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    
+    --card-shadow: 4px 4px 0px #000000; /* Hard offset brutalist shadow */
+    --transition-fast: 0.1s ease-out;
+    --transition-normal: 0.15s ease-out;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================================================
+   3. HEADER
+   ========================================================================= */
+.app-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    z-index: 10;
+    position: relative;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo-icon {
+    font-size: 1.8rem;
+    color: var(--accent-primary);
+}
+
+.logo-text h1 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--text-primary);
+}
+
+.logo-text .subtitle {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* =========================================================================
+   4. LAYOUT & HERO SECTION
+   ========================================================================= */
+.app-container {
+    flex: 1;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+}
+
+.search-hero {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.search-hero h2 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--text-primary);
+}
+
+.hero-desc {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.5;
+    max-width: 650px;
+    margin-bottom: 0.75rem;
+}
+
+/* =========================================================================
+   5. SEARCH CONTROL CARD & TOGGLE MODES
+   ========================================================================= */
+.glass-card {
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: 0px;
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+    width: 100%;
+}
+
+.search-control-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.search-mode-selector {
+    display: flex;
+    background: var(--bg-input);
+    border: 2px solid var(--border-color);
+    padding: 0px;
+    border-radius: 0px;
+    align-self: center;
+}
+
+.mode-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 0px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition-fast);
+}
+
+.mode-btn:hover {
+    background: #f0f0f0;
+    color: #000000;
+}
+
+.mode-btn.active {
+    background: var(--accent-primary);
+    color: #ffffff;
+    box-shadow: none;
+}
+
+/* Inputs wrapper */
+.input-wrapper {
+    display: none;
+    animation: fadeIn 0.2s ease-out forwards;
+    width: 100%;
+}
+
+.input-wrapper.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-3px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.search-box {
+    position: relative;
+    display: flex;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1.15rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+#movie-search-input, #vibe-query-input {
+    width: 100%;
+    background: var(--bg-input);
+    border: 2px solid var(--border-color);
+    padding: 0.9rem 1rem 0.9rem 2.8rem;
+    border-radius: 0px;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    outline: none;
+    transition: var(--transition-fast);
+}
+
+#movie-search-input:focus, #vibe-query-input:focus {
+    border-color: var(--accent-primary);
+    background: #ffffff;
+    box-shadow: 4px 4px 0px #000000;
+}
+
+/* Autocomplete Suggestion Box */
+.autocomplete-box {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: 0px;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 100;
+    box-shadow: var(--card-shadow);
+    display: none;
+}
+
+.autocomplete-item {
+    padding: 0.8rem 1.15rem;
+    cursor: pointer;
+    border-bottom: 2px solid var(--border-color);
+    transition: var(--transition-fast);
+}
+
+.autocomplete-item:hover {
+    background: #f0f0f0;
+}
+
+.autocomplete-item .item-title {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.autocomplete-item .item-genres {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.15rem;
+}
+
+/* Badges for Selected items */
+.selected-badge {
+    background: #ffffff;
+    border: 2px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    border-radius: 0px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    box-shadow: 2px 2px 0px #000000;
+}
+
+.badge-text {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+}
+
+.badge-text strong {
+    color: var(--accent-primary);
+}
+
+.clear-badge-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.clear-badge-btn:hover {
+    color: var(--accent-primary-hover);
+}
+
+.search-btn {
+    background: var(--accent-primary);
+    color: white;
+    border: 2px solid var(--border-color);
+    border-radius: 0px;
+    padding: 0 1.5rem;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    box-shadow: 3px 3px 0px #000000;
+}
+
+.search-btn:hover {
+    background: #ffffff;
+    color: #000000;
+    box-shadow: none;
+    transform: translate(3px, 3px);
+}
+
+/* =========================================================================
+   6. RESULTS SECTION & GRID
+   ========================================================================= */
+.results-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.6rem;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.section-title i {
+    color: var(--accent-primary);
+}
+
+.badge-count {
+    font-size: 0.75rem;
+    background: #000000;
+    padding: 0.2rem 0.6rem;
+    border-radius: 0px;
+    color: #ffffff;
+    font-weight: 800;
+}
+
+/* Loader */
+.results-loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    gap: 1rem;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+.spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid #f0f0f0;
+    border-top-color: var(--accent-primary);
+    border-radius: 50%;
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.no-results-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 2rem;
+    color: var(--text-muted);
+    text-align: center;
+    gap: 0.75rem;
+    background: transparent;
+    border: 2px dashed var(--border-color);
+    border-radius: 0px;
+}
+
+.no-results-placeholder i {
+    font-size: 2.5rem;
+    opacity: 0.3;
+}
+
+.no-results-placeholder p {
+    font-size: 0.95rem;
+}
+
+.movie-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+/* Horizontal Movie Bar */
+.movie-bar {
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: 0px;
+    padding: 0.8rem 1.15rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    transition: var(--transition-fast);
+    animation: fadeInUp 0.35s ease-out forwards;
+    box-shadow: var(--card-shadow);
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.movie-bar:hover {
+    background: #f0f0f0;
+    border-color: var(--border-hover);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #000000;
+}
+
+.bar-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.bar-title {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.bar-genres {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.bar-stats {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    min-width: 150px;
+}
+
+.bar-rating {
+    color: var(--accent-gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.bar-rating span {
+    color: var(--text-muted);
+}
+
+.bar-score {
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.bar-links {
+    display: flex;
+    gap: 0.5rem;
+    min-width: 90px;
+    justify-content: flex-end;
+}
+
+.bar-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 0px;
+    border: 2px solid #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+.bar-btn:hover {
+    transform: scale(1.05);
+}
+
+.bar-btn.imdb {
+    background: #ffffff;
+    color: #000000;
+    font-size: 1.35rem;
+}
+
+.bar-btn.imdb:hover {
+    background: #000000;
+    color: #ffffff;
+}
+
+.bar-btn.tmdb {
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+    width: auto;
+    padding: 0 0.5rem;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 0.68rem;
+    letter-spacing: -0.1px;
+}
+
+.bar-btn.tmdb:hover {
+    background: #000000;
+    color: #ffffff;
+}
+
+/* =========================================================================
+   7. FOOTER
+   ========================================================================= */
+.app-footer {
+    text-align: center;
+    padding: 2.5rem;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    border-top: 2px solid var(--border-color);
+    margin-top: auto;
+}
+
+/* =========================================================================
+   8. RESPONSIVE BREAKPOINTS
+   ========================================================================= */
+/* Tablet Breakpoint */
+@media (max-width: 900px) {
+    .app-header {
+        padding: 1.25rem 2rem;
+    }
+    
+    .app-container {
+        padding: 2rem 1.5rem;
+        gap: 2.5rem;
+    }
+    
+    .search-hero h2 {
+        font-size: 2rem;
+    }
+    
+    .movie-bar {
+        gap: 1rem;
+        padding: 0.8rem 1rem;
+    }
+    
+    .bar-stats {
+        min-width: 150px;
+        gap: 1rem;
+    }
+    
+    .bar-links {
+        min-width: 90px;
+    }
+}
+
+/* Mobile Breakpoint */
+@media (max-width: 600px) {
+    .app-header {
+        padding: 1rem 1.5rem;
+        justify-content: center;
+    }
+    
+    .app-container {
+        padding: 1.5rem 1rem;
+        gap: 2rem;
+    }
+    
+    .search-hero h2 {
+        font-size: 1.7rem;
+    }
+    
+    .hero-desc {
+        font-size: 0.9rem;
+    }
+    
+    .search-mode-selector {
+        width: 100%;
+        display: flex;
+    }
+    
+    .mode-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+    }
+    
+    .search-box {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .search-btn {
+        padding: 0.8rem;
+        width: 100%;
+        border-radius: 0px;
+    }
+    
+    .movie-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+        padding: 1rem;
+    }
+    
+    .bar-stats {
+        width: 100%;
+        min-width: unset;
+        justify-content: space-between;
+    }
+    
+    .bar-links {
+        width: 100%;
+        min-width: unset;
+        justify-content: flex-start;
+        margin-top: 0.1rem;
+    }
+}
+
+/* Small Mobile Breakpoint */
+@media (max-width: 400px) {
+    .search-hero h2 {
+        font-size: 1.5rem;
+    }
+    
+    .mode-btn {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.5rem;
+        gap: 0.35rem;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #ffffff;
+    border-left: 2px solid #000000;
+}
+::-webkit-scrollbar-thumb {
+    background: #000000;
+    border: 2px solid #ffffff;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555555;
+}

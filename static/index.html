@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineFriend - Discover Your Next Movie</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-logo">
+            <span class="logo-icon"><i class="fa-solid fa-film"></i></span>
+            <div class="logo-text">
+                <h1>CineFriend</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-container">
+        <section class="search-hero">
+            <h2>Find Your Next Favorite Film</h2>
+            <p class="hero-desc">Enter a movie you already love to find similar ones, or describe the plot, genre, or mood of what you want to watch.</p>
+            
+            <div class="search-control-card glass-card">
+                <!-- Toggle Mode Selector -->
+                <div class="search-mode-selector">
+                    <button id="mode-movie" class="mode-btn active"><i class="fa-solid fa-video"></i> Similar to Movie</button>
+                    <button id="mode-vibe" class="mode-btn"><i class="fa-solid fa-compass"></i> Search by Plot / Mood</button>
+                </div>
+
+                <!-- Input mode 1: Search by Movie -->
+                <div id="movie-input-wrapper" class="input-wrapper active">
+                    <div class="search-box">
+                        <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" id="movie-search-input" autocomplete="off" placeholder="Type a movie title (e.g. Iron Man, Inception, Toy Story)...">
+                        <div id="search-autocomplete-box" class="autocomplete-box"></div>
+                    </div>
+                    <!-- Selected Badge -->
+                    <div id="selected-movie-badge" class="selected-badge" style="display: none;">
+                        <span class="badge-text">Matches similar to: <strong id="selected-movie-name">None</strong></span>
+                        <button id="clear-selected-movie" class="clear-badge-btn"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>
+
+                <!-- Input mode 2: Search by Vibe -->
+                <div id="vibe-input-wrapper" class="input-wrapper">
+                    <div class="search-box">
+                        <span class="search-icon"><i class="fa-solid fa-quote-left"></i></span>
+                        <input type="text" id="vibe-query-input" placeholder="Describe what you want to watch (e.g. time travel loops, gritty bank heist, sweet romantic comedy)...">
+                        <button id="vibe-search-btn" class="search-btn">Find Movies</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loader Spinner -->
+        <div id="results-loader" class="results-loader" style="display: none;">
+            <div class="spinner"></div>
+            <p>Finding matching movies...</p>
+        </div>
+
+        <!-- Movie Recommendations List -->
+        <section class="results-section">
+            <div class="results-header" style="display: none;" id="results-header">
+                <h3 class="section-title"><i class="fa-solid fa-clapperboard"></i> Recommended Movies</h3>
+                <span id="results-count" class="badge-count">12 movies</span>
+            </div>
+
+            <!-- Initial Placeholder -->
+            <div id="no-results-placeholder" class="no-results-placeholder">
+                <i class="fa-solid fa-film"></i>
+                <p id="placeholder-text">Enter a movie title or describe a mood above to generate recommendations.</p>
+            </div>
+
+            <!-- List container -->
+            <div id="results-list" class="movie-list">
+                <!-- Movie items are injected here -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>&copy; 2026 CineFriend. All recommendations generated using MovieLens dataset correlations.</p>
+    </footer>
+
+    <!-- App Script -->
+    <script src="app.js"></script>
+</body>
+</html>
